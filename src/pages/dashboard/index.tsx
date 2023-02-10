@@ -1,19 +1,30 @@
-import { GetServerSidePropsContext, type NextPage } from "next";
-import { getSession, signOut } from "next-auth/react";
+import { type GetServerSidePropsContext} from "next";
+import { getSession } from "next-auth/react";
+import { type NextPageWithLayout } from "../_app";
+import { getDashboardLayout } from "./layout";
+function LightDarkToggle(){
+  const toggleDark = ()=>{
+    const htmlElement = document.documentElement;
+    if(htmlElement.classList.contains('dark')) return htmlElement.classList.remove('dark')
+    htmlElement.classList.add('dark');
 
- const Dashboard: NextPage = () => {
+
+  }
+  return <button onClick={toggleDark}>push</button>
+}
+const Dashboard: NextPageWithLayout = () => {
   return (
-    <main className="min-w-screen grid min-h-screen place-items-center bg-main dark:bg-dark-main">
-      <h1>This is the dashboard</h1>
-      <button
-        onClick={() => void signOut()}
-        className="rounded bg-button px-4 py-2 shadow hover:bg-button/75"
-      >
-        Signout
-      </button>
-    </main>
+    <>
+      <div className="flex flex-col justify-between">
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-bold">devfinder</h1>
+          <LightDarkToggle/>
+        </div>
+      </div>
+    </>
   );
 };
+Dashboard.getLayout = getDashboardLayout;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
@@ -23,10 +34,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         destination: "/",
         permanent: false,
       },
-   
     };
-     
-  }return {
+  }
+  return {
     props: {},
   };
 }
