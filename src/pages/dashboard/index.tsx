@@ -2,26 +2,20 @@ import { type GetServerSidePropsContext} from "next";
 import { getSession } from "next-auth/react";
 import { type NextPageWithLayout } from "../_app";
 import { getDashboardLayout } from "./layout";
-function LightDarkToggle(){
-  const toggleDark = ()=>{
-    const htmlElement = document.documentElement;
-    if(htmlElement.classList.contains('dark')) return htmlElement.classList.remove('dark')
-    htmlElement.classList.add('dark');
-
-
-  }
-  return <button onClick={toggleDark}>push</button>
-}
+import { LightDarkToggle } from "../../components/lightDarkToggle/lightDarkToggle.component";
+import { UserSearch } from "../../components/userSearch/userSearch.component";
+import { UserDetails } from "../../components/userDetails/userDetails.component";
+import { AddToListButton } from "../../components/addToListButton/addToListButton.component";
 const Dashboard: NextPageWithLayout = () => {
   return (
-    <>
-      <div className="flex flex-col justify-between">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-bold">devfinder</h1>
-          <LightDarkToggle/>
-        </div>
+    <div>
+      <div className="mx-auto flex w-10/12 flex-col justify-between md:w-9/12 lg:w-full lg:max-w-[730px]">
+        <LightDarkToggle />
+        <UserSearch />
+        <UserDetails/>
+        <AddToListButton/>
       </div>
-    </>
+    </div>
   );
 };
 Dashboard.getLayout = getDashboardLayout;
