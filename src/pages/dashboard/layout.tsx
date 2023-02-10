@@ -6,7 +6,7 @@ interface ILayoutProps {
 function Layout({ children }: ILayoutProps) {
   return (
     <>
-      <main className="grid min-h-screen min-w-screen place-items-center bg-main text-primary dark:bg-dark-main dark:text-dark-primary">
+      <main className="min-h-screen min-w-screen flex flex-col gap-20 justify-start  bg-main text-primary dark:bg-dark-main dark:text-dark-primary">
         <DashboardMenu />
         {children}
       </main>
