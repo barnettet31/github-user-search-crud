@@ -1,5 +1,5 @@
-import { ReactElement, ReactNode, useEffect } from "react";
-import { AppProps, type AppType } from "next/app";
+import { type ReactElement,type ReactNode, useEffect } from "react";
+import { type AppProps } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { api } from "../utils/api";
@@ -40,7 +40,7 @@ function MyApp({
   return (
     <SessionProvider session={pageProps.session}>
       <Head>
-        <title>Front End Mentor - Entertainment App</title>
+        <title>Front End Mentor - Github Search App</title>
         <link rel="shortcut icon" href="/favicon-32x32.png" />
       </Head>
       {getLayout(<Component {...pageProps} />)}
