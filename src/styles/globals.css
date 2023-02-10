@@ -7,3 +7,9 @@ body{
     font-family: 'Space Mono', monospace;
     @apply text-primary dark:text-dark-primary
 }
+
+@layer utilities{
+    .filter-dark{
+        filter: invert(9%) sepia(25%) saturate(771%) hue-rotate(181deg) brightness(95%) contrast(85%);
+    }
+}
