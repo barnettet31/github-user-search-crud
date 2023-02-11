@@ -7,6 +7,7 @@ import { api } from "../utils/api";
 import "../styles/globals.css";
 import { type NextPage } from "next";
 import Head from "next/head";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 // No changes to this type
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -17,6 +18,7 @@ type AppPropsWithLayout<P> = AppProps<P> & {
   Component: NextPageWithLayout<P>;
 };
 
+const queryClient = new QueryClient()
 function MyApp({
   Component,
   pageProps,
@@ -39,11 +41,13 @@ function MyApp({
   },[])
   return (
     <SessionProvider session={pageProps.session}>
-      <Head>
-        <title>Front End Mentor - Github Search App</title>
-        <link rel="shortcut icon" href="/favicon-32x32.png" />
-      </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <QueryClientProvider client={queryClient}>
+        <Head>
+          <title>Front End Mentor - Github Search App</title>
+          <link rel="shortcut icon" href="/favicon-32x32.png" />
+        </Head>
+        {getLayout(<Component {...pageProps} />)}
+      </QueryClientProvider>
     </SessionProvider>
   );
 }
