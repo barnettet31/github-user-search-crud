@@ -1,24 +1,23 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { api } from "../../utils/api";
 
-export const DeleteButton =({url}:{url:string})=>{
+export const DeleteButton =({id}:{id:string})=>{
     const utils = api.useContext();
     const queryClient = useQueryClient();
-    const {mutate, isLoading:deletingElement} = api.list.deleteItem.useMutation({
+    const {mutate, isLoading:deletingElement} = api.list.deleteList.useMutation({
         onSettled:()=>{
-            console.log('this is getting fired')
              void utils.list.getListItems.invalidate();
              void queryClient.invalidateQueries();
            
         }
     });
     const handleClick = ()=>{
-        mutate({link:url});
+        mutate({listId:id});
        
     }
-    if(deletingElement) return <div className="absolute right-4 top-10 w-8 h-8 border-red-500 rounded-full border border-r-0 animate-spin"></div>
+    if(deletingElement) return <div className="w-8 h-8 border-red-500 rounded-full border border-r-0 animate-spin"></div>
     return (
-      <button onClick={handleClick} className="text-red absolute top-10 right-4 rounded-lg bg-button px-2 py-2 hover:bg-button/75">
+      <button onClick={handleClick} className=" rounded-lg bg-button px-2 py-2 hover:bg-button/75">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

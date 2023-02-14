@@ -8,9 +8,10 @@ import {
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { Fragment } from "react";
+import { CurrentUser } from "../currentUser/currentUser.component";
 export default function DashboardMenu() {
   return (
-    <div className="w-full flex items-center justify-end px-4 py-4">
+    <div className="flex w-full items-center justify-end px-4 py-4">
       <div className="top-4 right-4 w-56 text-right">
         <Menu as="div" className="relative inline-block text-left">
           <div>
@@ -31,7 +32,8 @@ export default function DashboardMenu() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-elevated shadow-lg dark:bg-dark-elevated">
+            <Menu.Items className="absolute right-0 z-50 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-elevated shadow-lg dark:bg-dark-elevated">
+              <CurrentUser/>
               <div className="px-1 py-1">
                 <Menu.Item>
                   {({ active }) => (

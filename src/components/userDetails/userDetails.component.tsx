@@ -7,7 +7,7 @@ interface IUserDetails {
 export function UserDetails({userData}:IUserDetails){
     if(!userData) return <DefaultDetails/>
     return (
-      <div className="mt-6 flex flex-col rounded-xl bg-elevated px-6 py-8 shadow-lg dark:bg-dark-elevated">
+      <div className="mt-6 flex flex-col rounded-xl bg-elevated px-6 py-8 shadow-lg dark:bg-dark-elevated h-full justify-between">
         <div className="div flex h-[70px] items-center justify-start gap-5 md:h-[117px]">
           <Image
             className="h-[70px] w-[70px] rounded-full md:h-[117px] md:w-[117px] "

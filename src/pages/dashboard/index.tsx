@@ -12,6 +12,7 @@ import { useState } from "react";
 import { api } from "../../utils/api";
 import { LoadingState } from "../../components/loadingState/loadingState.component";
 const Dashboard: NextPageWithLayout = () => {
+
   const [userId, setUserId] = useState("");
   const [isError, setIsError] = useState(false);
   const utils = api.useContext()
@@ -29,6 +30,14 @@ const Dashboard: NextPageWithLayout = () => {
       void utils.list.getListItems.invalidate()
     }
   });
+  const {isLoading, mutate:createList} = api.list.createList.useMutation({
+    onSuccess:(d)=>{
+      if(!d) throw Error('No list created'); 
+      if(!data) throw Error("No user currently selected");
+      addToList({link:data.url, listId:d.id});
+
+    }
+  });
   
   const updateUserId = (id: string) => {
     setUserId(id);
@@ -36,10 +45,13 @@ const Dashboard: NextPageWithLayout = () => {
   const clearError = () => {
     setIsError(false);
   }
-  const handleAddToList = ()=>{
+  const handleAddToList = (id:string)=>{
     if(!data) return 
-    addToList({link:data.url});
+    addToList({link:data.url, listId:id});
+    
   }
+  const handleCreateList = (title:string)=>createList({title:title});
+ 
   if (addingUser) return <LoadingState />;
     return (
       <div>
@@ -52,6 +64,7 @@ const Dashboard: NextPageWithLayout = () => {
           />
           <UserDetails userData={data} />
           <AddToListButton
+            createListAndAdd={handleCreateList}
             isLoading={loadingUser || addingUser}
             addToList={handleAddToList}
           />
