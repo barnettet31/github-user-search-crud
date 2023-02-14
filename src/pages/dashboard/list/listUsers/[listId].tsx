@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { type NextPageWithLayout } from "../../../_app";
-import { getDashboardLayout } from "../../layout";
+import { getDashboardLayout } from "../../../../components/dashboardLayout/layout";
 import { api } from "../../../../utils/api";
 import { EmptyList } from "../../../../components/emptyList/emptyList.component";
 import uuid from "react-uuid";

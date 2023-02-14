@@ -1,5 +1,5 @@
 import { type ReactElement } from "react";
-import DashboardMenu from "../../components/dashboardMenu/dashboardMenu.component";
+import DashboardMenu from "../dashboardMenu/dashboardMenu.component";
 interface ILayoutProps {
   children: ReactElement;
 }

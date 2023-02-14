@@ -1,7 +1,7 @@
 import { type GetServerSidePropsContext} from "next";
 import { getSession } from "next-auth/react";
 import { type NextPageWithLayout } from "../_app";
-import { getDashboardLayout } from "./layout";
+import { getDashboardLayout } from "../../components/dashboardLayout/layout";
 import { LightDarkToggle } from "../../components/lightDarkToggle/lightDarkToggle.component";
 import { UserSearch } from "../../components/userSearch/userSearch.component";
 import { UserDetails } from "../../components/userDetails/userDetails.component";

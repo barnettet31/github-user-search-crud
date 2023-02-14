@@ -1,7 +1,7 @@
 import { type GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import { type NextPageWithLayout } from "../../_app";
-import { getDashboardLayout } from "../layout";
+import { getDashboardLayout } from "../../../components/dashboardLayout/layout";
 import { api } from "../../../utils/api";
 import { ListItem } from "../../../components/listItem/listItem.component";
 import uuid from "react-uuid";
