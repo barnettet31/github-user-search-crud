@@ -9,10 +9,10 @@ interface IRepoItemProps {
 export const RepoItem = ({ repo }: IRepoItemProps) => {
   return (
     <li>
-      <Link href={repo.html_url} className="block hover:brightness-200">
+      <Link href={repo.html_url} className="group block">
         <div className="px-4 py-4 sm:px-6">
           <div className="flex items-center justify-start">
-            <p className="truncate text-sm font-medium text-primary dark:text-dark-primary ">
+            <p className="truncate text-sm font-medium text-primary group-hover:text-secondary dark:text-dark-primary dark:group-hover:text-dark-secondary ">
               {repo.name}
             </p>
           </div>
@@ -27,7 +27,7 @@ export const RepoItem = ({ repo }: IRepoItemProps) => {
                 </p>
               ))}
             </div>
-            <div className="mt-2 flex items-center text-sm text-secondary dark:text-dark-secondary sm:mt-0">
+            <div className="mt-2 flex items-center text-sm text-secondary group-hover:text-tertiary dark:text-dark-secondary dark:group-hover:text-dark-tertiary sm:mt-0">
               <CalendarIcon
                 className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                 aria-hidden="true"
