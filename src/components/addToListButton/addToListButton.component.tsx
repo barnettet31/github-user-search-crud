@@ -1,6 +1,5 @@
 import { Fragment, useState } from "react";
 import { api } from "../../utils/api";
-import uuid from "react-uuid";
 import { Dialog, Transition } from "@headlessui/react";
 import { AddNewList } from "../addNewList/addNewList.component";
 import { AddToList } from "../addToList/addToList.component";
@@ -17,8 +16,8 @@ export function AddToListButton({
   createListAndAdd,
 }: IAddToListButton) {
   const [isOpen, setIsOpen] = useState(false);
-  const {isLoading:gettingLists ,data:myLists} = api.list.getCurrentLists.useQuery()
-  const closeModal = ()=>setIsOpen(false);
+  const { data: myLists } = api.list.getCurrentLists.useQuery();
+  const closeModal = () => setIsOpen(false);
   return (
     <>
       <button
@@ -53,7 +52,7 @@ export function AddToListButton({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md trans overflow-hidden rounded-2xl bg-elevated p-6 text-left align-middle shadow-xl transition-all dark:bg-dark-elevated">
+                <Dialog.Panel className="trans w-full max-w-md overflow-hidden rounded-2xl bg-elevated p-6 text-left align-middle shadow-xl transition-all dark:bg-dark-elevated">
                   <div className="flex w-full items-center justify-between">
                     <Dialog.Title
                       as="h3"

@@ -1,4 +1,4 @@
-import { type GetServerSidePropsContext} from "next";
+import { type GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import { type NextPageWithLayout } from "../_app";
 import { getDashboardLayout } from "../../components/dashboardLayout/layout";
@@ -12,65 +12,64 @@ import { useState } from "react";
 import { api } from "../../utils/api";
 import { LoadingState } from "../../components/loadingState/loadingState.component";
 const Dashboard: NextPageWithLayout = () => {
-
   const [userId, setUserId] = useState("");
   const [isError, setIsError] = useState(false);
-  const utils = api.useContext()
-  const { data, isLoading:loadingUser} = useQuery(["user", userId], () =>
-    getUserInfo(userId),
+  const utils = api.useContext();
+  const { data, isLoading: loadingUser } = useQuery(
+    ["user", userId],
+    () => getUserInfo(userId),
     {
       enabled: !!userId,
       onError: () => setIsError(true),
-      retry:0
+      retry: 0,
     }
   );
-  const {isLoading:addingUser, mutate:addToList} = api.list.setListItem.useMutation({
-    onSettled: ()=>{
-      setUserId("");
-      void utils.list.getListItems.invalidate()
-    }
+  const { isLoading: addingUser, mutate: addToList } =
+    api.list.setListItem.useMutation({
+      onSettled: () => {
+        setUserId("");
+        void utils.list.getListItems.invalidate();
+      },
+    });
+  const { mutate: createList } = api.list.createList.useMutation({
+    onSuccess: (d) => {
+      if (!d) throw Error("No list created");
+      if (!data) throw Error("No user currently selected");
+      addToList({ link: data.url, listId: d.id });
+    },
   });
-  const {isLoading, mutate:createList} = api.list.createList.useMutation({
-    onSuccess:(d)=>{
-      if(!d) throw Error('No list created'); 
-      if(!data) throw Error("No user currently selected");
-      addToList({link:data.url, listId:d.id});
 
-    }
-  });
-  
   const updateUserId = (id: string) => {
     setUserId(id);
-  }
+  };
   const clearError = () => {
     setIsError(false);
-  }
-  const handleAddToList = (id:string)=>{
-    if(!data) return 
-    addToList({link:data.url, listId:id});
-    
-  }
-  const handleCreateList = (title:string)=>createList({title:title});
- 
+  };
+  const handleAddToList = (id: string) => {
+    if (!data) return;
+    addToList({ link: data.url, listId: id });
+  };
+  const handleCreateList = (title: string) => createList({ title: title });
+
   if (addingUser) return <LoadingState />;
-    return (
-      <div>
-        <div className="mx-auto flex w-10/12 flex-col justify-between md:w-9/12 lg:w-full lg:max-w-[730px]">
-          <LightDarkToggle />
-          <UserSearch
-            clearError={clearError}
-            isError={isError}
-            search={updateUserId}
-          />
-          <UserDetails userData={data} />
-          <AddToListButton
-            createListAndAdd={handleCreateList}
-            isLoading={loadingUser || addingUser}
-            addToList={handleAddToList}
-          />
-        </div>
+  return (
+    <div>
+      <div className="mx-auto flex w-10/12 flex-col justify-between md:w-9/12 lg:w-full lg:max-w-[730px]">
+        <LightDarkToggle />
+        <UserSearch
+          clearError={clearError}
+          isError={isError}
+          search={updateUserId}
+        />
+        <UserDetails userData={data} />
+        <AddToListButton
+          createListAndAdd={handleCreateList}
+          isLoading={loadingUser || addingUser}
+          addToList={handleAddToList}
+        />
       </div>
-    );
+    </div>
+  );
 };
 Dashboard.getLayout = getDashboardLayout;
 

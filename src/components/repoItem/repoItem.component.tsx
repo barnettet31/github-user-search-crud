@@ -1,6 +1,7 @@
-import { IUserReposResult } from "../../axios/types";
+import { type IUserReposResult } from "../../axios/types";
 import { CalendarIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import uuid from "react-uuid";
 
 interface IRepoItemProps {
   repo: IUserReposResult;
@@ -21,7 +22,10 @@ export const RepoItem = ({ repo }: IRepoItemProps) => {
           <div className="mt-2 sm:flex sm:justify-between">
             <div className="sm:flex">
               {repo.topics.map((topic) => (
-                <p className="flex items-center text-sm text-button sm:mt-0">
+                <p
+                  key={uuid()}
+                  className="flex items-center text-sm text-button sm:mt-0"
+                >
                   {topic}
                 </p>
               ))}
