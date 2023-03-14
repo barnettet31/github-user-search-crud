@@ -2,6 +2,7 @@ import { type IUserReposResult } from "../../axios/types";
 import { CalendarIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import uuid from "react-uuid";
+import { formatDate } from "../../utils/formatDate";
 
 interface IRepoItemProps {
   repo: IUserReposResult;
@@ -18,14 +19,9 @@ export const RepoItem = ({ repo }: IRepoItemProps) => {
           </div>
           <div className="mt-2 sm:flex sm:justify-between">
             <div className="sm:flex">
-              {repo.topics.map((topic) => (
-                <p
-                  key={uuid()}
-                  className="flex items-center text-sm text-button sm:mt-0"
-                >
-                  {topic}
-                </p>
-              ))}
+              <p className="flex items-center text-sm text-button sm:mt-0">
+                {repo.description}
+              </p>
             </div>
             <div className="mt-2 flex items-center text-sm text-secondary group-hover:text-tertiary dark:text-dark-secondary dark:group-hover:text-dark-tertiary sm:mt-0">
               <CalendarIcon
@@ -34,7 +30,9 @@ export const RepoItem = ({ repo }: IRepoItemProps) => {
               />
               <p>
                 Last Updated{" "}
-                <time dateTime={repo.updated_at}>{repo.updated_at}</time>
+                <time dateTime={repo.updated_at}>
+                  {formatDate(repo.updated_at)}
+                </time>
               </p>
             </div>
           </div>
