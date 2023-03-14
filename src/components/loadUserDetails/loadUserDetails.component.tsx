@@ -29,7 +29,7 @@ export const LoadUserDetails = ({
   if (!userData) return <DefaultDetails />;
   return (
     <div className="relative">
-      <div className="w-flex absolute top-10 right-4 items-center justify-center">
+      <div className="absolute top-10 right-4 flex items-center justify-center gap-4">
         <button
           onClick={() => handleDelete(url, id)}
           className="rounded-lg bg-button p-2 text-white hover:bg-button/75"
@@ -63,7 +63,7 @@ export const LoadUserDetails = ({
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="h-6 w-6"
+            className="h-4 w-4"
           >
             <path
               strokeLinecap="round"

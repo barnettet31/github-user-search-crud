@@ -9,10 +9,7 @@ interface IRepoItemProps {
 export const RepoItem = ({ repo }: IRepoItemProps) => {
   return (
     <li>
-      <Link
-        href={repo.html_url}
-        className="block hover:bg-elevated/75 dark:hover:bg-dark-elevated/75 "
-      >
+      <Link href={repo.html_url} className="block hover:brightness-200">
         <div className="px-4 py-4 sm:px-6">
           <div className="flex items-center justify-start">
             <p className="truncate text-sm font-medium text-primary dark:text-dark-primary ">
