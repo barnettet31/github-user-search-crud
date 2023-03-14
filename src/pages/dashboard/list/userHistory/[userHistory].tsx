@@ -19,7 +19,7 @@ const UserHistoryPage: NextPageWithLayout = () => {
   if (!userRepoHistory)
     return (
       <div>
-        <h1>This user doesn't seem to have any repos at the moment...</h1>
+        <h1>This user does not seem to have any repos at the moment...</h1>
       </div>
     );
   return (

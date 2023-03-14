@@ -1,4 +1,3 @@
-import uuid from "react-uuid";
 import { IUserReposResult } from "../../axios/types";
 import { CalendarIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
