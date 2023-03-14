@@ -3,7 +3,6 @@ import { getSession, signIn } from "next-auth/react";
 import { LandingFooter } from "../components/landingFooter/landingFooter.component";
 
 const Home: NextPage = () => {
-
   return (
     <>
       <main className="min-w-screen grid min-h-screen place-items-center bg-main dark:bg-dark-main">
@@ -13,7 +12,7 @@ const Home: NextPage = () => {
             This app requires user authentication to operate. Please login.
           </p>
           <button
-            onClick={() => void signIn("google")}
+            onClick={() => void signIn("google", { callbackUrl: "/dashboard" })}
             className="rounded bg-button px-4 py-2 shadow hover:bg-button/75"
           >
             Login With Google
@@ -25,21 +24,18 @@ const Home: NextPage = () => {
   );
 };
 
-export async function getServerSideProps(context:GetServerSidePropsContext){
-  const session = await getSession(context)
-  if(session){
-    return{
-      redirect:{
-        destination:'/dashboard',
-        permanent:false
-      }
-
-    }
-
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
   }
   return {
-    props:{}
-  }
+    props: {},
+  };
 }
 export default Home;
-
