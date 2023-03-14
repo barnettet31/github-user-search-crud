@@ -24,8 +24,8 @@ const UserHistoryPage: NextPageWithLayout = () => {
     );
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="overflow-hidden bg-elevated shadow dark:bg-dark-elevated sm:rounded-md">
-        <ul role="list" className="divide-y divide-button">
+      <div className="w-full overflow-hidden bg-elevated shadow dark:bg-dark-elevated sm:rounded-md">
+        <ul role="list" className="w-full divide-y divide-button">
           {userRepoHistory.map((repo) => (
             <RepoItem key={uuid()} repo={repo} />
           ))}
