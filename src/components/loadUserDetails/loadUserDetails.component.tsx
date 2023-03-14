@@ -3,6 +3,7 @@ import { getUserDetails } from "../../axios/getUserDetails";
 import { LoadingState } from "../loadingState/loadingState.component";
 import { UserDetails } from "../userDetails/userDetails.component";
 import Link from "next/link";
+import { DefaultDetails } from "../defaultDetails/defaultDetails.component";
 
 interface ILoadUserDetailsProps {
   url: string;
@@ -25,6 +26,7 @@ export const LoadUserDetails = ({
     }
   );
   if (isLoading) return <LoadingState />;
+  if (!userData) return <DefaultDetails />;
   return (
     <div className="relative">
       <div className="w-flex absolute top-10 right-4 items-center justify-center">
@@ -52,7 +54,7 @@ export const LoadUserDetails = ({
           )}
         </button>
         <Link
-          href={`/dashboard/list/userHistory/${userData?.login}`}
+          href={`/dashboard/list/userHistory/${userData.login}`}
           className="rounded-lg bg-button p-2 text-white hover:bg-button/75"
         >
           <svg
